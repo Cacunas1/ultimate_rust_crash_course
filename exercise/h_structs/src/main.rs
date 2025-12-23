@@ -36,6 +36,14 @@ impl Polygon {
             visible: true,
         }
     }
+    pub fn shape(&self) -> String {
+        match self.sides {
+            3 => "triangle".to_string(),
+            4 => "square".to_string(),
+            5 => "pentagon".to_string(),
+            _ => "polygon".to_string(),
+        }
+    }
 }
 
 fn main() {
@@ -65,11 +73,11 @@ fn main() {
     //
     // Then uncomment and run the code below.
 
-    // println!(
-    //     "The polygon named {} is a {}",
-    //     polygon.name,
-    //     polygon.shape()
-    // );
+    println!(
+        "The polygon named {} is a {}",
+        polygon.name,
+        polygon.shape()
+    );
 
     // 5. In the `impl Polygon` block above:
     //
