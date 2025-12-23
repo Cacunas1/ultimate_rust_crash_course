@@ -8,7 +8,11 @@
 // - sides - u32
 // - visible - bool
 
-// struct Polygon ...
+struct Polygon {
+    name: String,
+    sides: u32,
+    visible: bool,
+}
 
 // 2. Create an implementation block for the `Polygon` struct.
 //
@@ -24,7 +28,15 @@
 //
 // Then build the program with `cargo build` to ensure you don't have any syntax errors.
 
-// impl Polygon ...
+impl Polygon {
+    pub fn new(name: String) -> Self {
+        Polygon {
+            name: name,
+            sides: 3,
+            visible: true,
+        }
+    }
+}
 
 fn main() {
     // 3. Create a new, mutable polygon variable by calling the Polygon's `new` associated function.
@@ -34,11 +46,11 @@ fn main() {
     //
     // Then uncomment and run the code below to see a message about the polygon.
 
-    // let mut polygon = ...
-    // println!(
-    //     "I see a {}-sided polygon named {}!",
-    //     polygon.sides, polygon.name
-    // );
+    let mut polygon = Polygon::new("George".to_string());
+    println!(
+        "I see a {}-sided polygon named {}!",
+        polygon.sides, polygon.name
+    );
 
     // 4. In the `impl Polygon` block above:
     //
