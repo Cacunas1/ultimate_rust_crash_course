@@ -10,8 +10,7 @@
 // - Add `use` statement(s) to main.rs to bring the constants into scope.
 //
 // Hint: the name of the library is defined in Cargo.toml
-use animal::sound;
-use animal::{FIRST, SECOND, THIRD};
+use animal::prelude::*;
 
 // 2. Create a library module named `sound` and move the animal functions into it.
 //
@@ -25,13 +24,13 @@ use animal::{FIRST, SECOND, THIRD};
 
 fn main() {
     print!("Listening to animal {}: ", FIRST);
-    sound::dog();
+    dog();
 
     print!("Listening to animal {}: ", SECOND);
-    sound::cat();
+    cat();
 
     print!("Listening to animal {}: ", THIRD);
-    sound::fox();
+    fox();
 }
 
 // Challenge 1
