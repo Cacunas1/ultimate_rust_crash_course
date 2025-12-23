@@ -44,6 +44,9 @@ impl Polygon {
             _ => "polygon".to_string(),
         }
     }
+    pub fn increment_sides(&mut self) {
+        self.sides += 1;
+    }
 }
 
 fn main() {
@@ -88,14 +91,14 @@ fn main() {
     //
     // Then uncomment and run the code below.
 
-    // for _ in 0..3 {
-    //     polygon.increment_sides();
-    //     println!(
-    //         "The polygon now has {} sides and is the shape of a {}",
-    //         polygon.sides,
-    //         polygon.shape()
-    //     );
-    // }
+    for _ in 0..3 {
+        polygon.increment_sides();
+        println!(
+            "The polygon now has {} sides and is the shape of a {}",
+            polygon.sides,
+            polygon.shape()
+        );
+    }
 
     // Challenge: Move the `Polygon` struct and impl blocks to lib.rs and put `pub` in front of the
     // fields, methods, and associated function that need to be public. Then add `use` statements to
