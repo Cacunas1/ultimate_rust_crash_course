@@ -10,10 +10,8 @@
 // - Add `use` statement(s) to main.rs to bring the constants into scope.
 //
 // Hint: the name of the library is defined in Cargo.toml
-
-const FIRST: i32 = 1;
-const SECOND: i32 = 2;
-const THIRD: i32 = 3;
+use animal::sound;
+use animal::{FIRST, SECOND, THIRD};
 
 // 2. Create a library module named `sound` and move the animal functions into it.
 //
@@ -25,27 +23,15 @@ const THIRD: i32 = 3;
 // - Change the function calls to access the functions through the `sound` module.
 //   For example: sound::dog()
 
-fn dog() {
-    println!("Dog goes WOOF!");
-}
-
-fn cat() {
-    println!("Cat goes MEOW!");
-}
-
-fn fox() {
-    println!("What does the fox say???");
-}
-
 fn main() {
     print!("Listening to animal {}: ", FIRST);
-    dog();
+    sound::dog();
 
     print!("Listening to animal {}: ", SECOND);
-    cat();
+    sound::cat();
 
     print!("Listening to animal {}: ", THIRD);
-    fox();
+    sound::fox();
 }
 
 // Challenge 1
