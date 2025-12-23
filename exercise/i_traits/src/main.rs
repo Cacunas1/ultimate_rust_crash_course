@@ -40,6 +40,16 @@ impl Colorful for Hat {
     }
 }
 
+impl Colorful for i32 {
+    fn color(&self) -> String {
+        if is_even(*self) {
+            "orange".to_string()
+        } else {
+            "purple".to_string()
+        }
+    }
+}
+
 fn main() {
     // 1c. Uncomment and run the code below. If you correctly implemented Colorful for Hat, then
     // the order of the colors in the output will be red, green, and blue.
