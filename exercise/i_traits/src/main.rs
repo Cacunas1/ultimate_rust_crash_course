@@ -6,7 +6,9 @@
 //
 // You must also complete 1b before the code will compile.
 
-// trait Colorful ...
+trait Colorful {
+    fn color(&self) -> String;
+}
 
 // 1b. Implement the `Colorful` trait for the `Hat` struct:
 //
@@ -22,16 +24,30 @@ struct Hat {
     size: i32,
 }
 
-// impl Colorful for Hat ...
+impl Hat {
+    pub fn new(size: i32) -> Self {
+        Hat { size }
+    }
+}
+
+impl Colorful for Hat {
+    fn color(&self) -> String {
+        match self.size {
+            0..=5 => "red".to_string(),
+            6..=7 => "green".to_string(),
+            _ => "blue".to_string(),
+        }
+    }
+}
 
 fn main() {
     // 1c. Uncomment and run the code below. If you correctly implemented Colorful for Hat, then
     // the order of the colors in the output will be red, green, and blue.
 
-    // let small_hat = Hat { size: 2 };
-    // let medium_hat = Hat { size: 7 };
-    // let large_hat = Hat { size: 100 };
-    // describe_three_hats(&small_hat, &medium_hat, &large_hat);
+    let small_hat = Hat { size: 2 };
+    let medium_hat = Hat { size: 7 };
+    let large_hat = Hat { size: 100 };
+    describe_three_hats(&small_hat, &medium_hat, &large_hat);
 
     // 2. Implement the Colorful trait for the type i32. The `colorful` method for an i32 should
     // return these String values:
