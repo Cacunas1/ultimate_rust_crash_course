@@ -23,13 +23,13 @@ fn main() {
     // Use array indexing.  Done correctly, `cargo run` will produce the additional output
     // "Ding, you found 13!"
     //
-    //ding(...);
+    ding(series);
 
     let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
     // 4. Pass the `on_off` function the value `true` from the variable `mess`.  Done correctly,
     // `cargo run` will produce the additional output "Lights are on!" I'll get you started:
     //
-    //on_off(mess.2 ...);
+    on_off(mess.2[0].0);
 
     // 5. (Part A)
     //
@@ -71,8 +71,9 @@ fn print_array(a: [f64; 2]) {
     println!("The coordinates are ({}, {})", a[0], a[1]);
 }
 
-fn ding(x: i32) {
-    if x == 13 {
+fn ding(x: [i32; 7]) {
+    let value_to_check = 13;
+    if x.contains(&value_to_check) {
         println!("Ding, you found 13!");
     }
 }
