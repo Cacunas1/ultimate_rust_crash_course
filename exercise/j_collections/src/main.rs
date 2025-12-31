@@ -38,7 +38,8 @@ fn main() {
     // Challenge: Create a vector named `buffer` containing 1024 zeroes using the `vec!` macro. This
     // should easily fit on one line without wrapping.
 
-    // let buffer = ...
+    let buffer = vec![0; 1024];
+    println!("Number of zeros inside buffer: {}", buffer.len());
 
     // Challenge 2: Use a `for` loop and array indexing to change each entry in `buffer` to be its
     // index value multiplied by 2. For example:
