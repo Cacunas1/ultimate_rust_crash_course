@@ -35,10 +35,20 @@ fn main() {
     // for all
     // great men
 
-    let saying = "Now is\nthe time\nfor all\ngreat men";
+    let mut saying: String = "Now is
+        the time
+        for all
+        great men"
+        .to_string();
+    saying = saying
+        .lines()
+        .map(|line| line.trim())
+        .collect::<Vec<_>>()
+        .join("\n");
     println!("{saying}");
 
     // Challenge: Change the string literal in #3 so that it:
+    //
     //
     // - Is a multiline string (uses real newlines instead of newline escape codes)
     // - Is indented properly with the code
