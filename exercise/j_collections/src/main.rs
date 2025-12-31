@@ -9,8 +9,8 @@ fn main() {
     // this by creating `things` and then calling the `push` method repeatedly, or by using the
     // `vec!` macro. Then uncomment and run the code below.
 
-    // let things ...
-    // println!("{:?}", things); // `:?` means "the debug representation"
+    let things = vec![item, animal, container, material];
+    println!("{:?}", things); // `:?` means "the debug representation"
 
     // 2. Print out the length of the `things` vector using the `len` method.
 
