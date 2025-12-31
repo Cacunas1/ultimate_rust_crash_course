@@ -7,7 +7,10 @@ fn main() {
     // Then run your code. You should get the output "apple".
 
     let maybe_fruit: Option<&str> = Some("apple");
-    // if ...
+    if maybe_fruit.is_some() {
+        let certain_fruit = maybe_fruit.unwrap();
+        println!("{certain_fruit}");
+    }
 
     // 2. Write a function `inspect` that accepts an `Option<&str>` as an argument and does not
     // return anything. Use an `if let` expression inside the function to get the value wrapped by
