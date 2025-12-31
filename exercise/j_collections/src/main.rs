@@ -9,7 +9,7 @@ fn main() {
     // this by creating `things` and then calling the `push` method repeatedly, or by using the
     // `vec!` macro. Then uncomment and run the code below.
 
-    let things = vec![item, animal, container, material];
+    let mut things = vec![item, animal, container, material];
     println!("{:?}", things); // `:?` means "the debug representation"
 
     // 2. Print out the length of the `things` vector using the `len` method.
@@ -25,7 +25,8 @@ fn main() {
     // 4. Sort `things` by calling the `sort` method. The variable needs to be mutable for this to
     // compile without errors. Then uncomment and run the code below.
 
-    // println!("Sorted values: {things:?}"); // variables can go inside the curly braces
+    things.sort();
+    println!("Sorted values: {things:?}"); // variables can go inside the curly braces
 
     // 5. Use a `for` loop to print out each item in `things`. It is okay to consume `things`, since
     // we won't be using it any more after this.
