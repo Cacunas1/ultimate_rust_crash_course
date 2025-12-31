@@ -36,7 +36,7 @@ fn main() {
     // Uncomment the line below, run the code, and examine the output. Then go refactor the
     // `print_distance` function according to the instructions in the comments inside that function.
 
-    // print_distance(coords);
+    print_distance(coords.0, coords.1);
 }
 
 // 5. (Part B)
@@ -46,10 +46,10 @@ fn main() {
 // and then adjust the function body below to use `x` and `y` instead of `z.0` and `z.1`
 //
 // You should be able to run the code again and get the output as before.
-fn print_distance(z: (f64, f64)) {
+fn print_distance(x: f64, y: f64) {
     println!(
         "Distance to the origin is {}",
-        (z.0.powf(2.0) + z.1.powf(2.0)).sqrt()
+        (x.powf(2.0) + y.powf(2.0)).sqrt()
     );
 }
 
