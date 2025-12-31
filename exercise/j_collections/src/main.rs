@@ -14,7 +14,7 @@ fn main() {
 
     // 2. Print out the length of the `things` vector using the `len` method.
 
-    // println!("things has a length of {}", ...);
+    println!("things has a length of {}", things.len());
 
     // 3. We want to use the `animal` variable in the (commented-out) code below, but we cannot
     // because the value has been moved into `things`. Uncomment the code below and change it to use
