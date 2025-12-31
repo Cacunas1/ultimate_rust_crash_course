@@ -30,6 +30,9 @@ fn main() {
     let mut sum = 0;
 
     // (write the `for` loop here)
+    for i in 7..=23 {
+        sum += i;
+    }
 
     println!("The sum is {}", sum);
 
