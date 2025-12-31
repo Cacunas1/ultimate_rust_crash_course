@@ -16,12 +16,9 @@ fn main() {
     let mut bunnies = 2;
 
     // (write your `loop` here)
-    loop {
+    while bunnies < 500 {
         count += 1;
         bunnies *= 2;
-        if bunnies > 500 {
-            break;
-        }
     }
 
     println!(
