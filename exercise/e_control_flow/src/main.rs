@@ -71,6 +71,13 @@ fn main() {
     let numbers = vec![0, 1, 2, 3, 4, 5];
     for number in numbers {
         // (write your `if/else` expression here)
+        if number == 0 {
+            total += 7;
+        } else if number == 1 || number == 2 {
+            total += 30;
+        } else {
+            total -= 5;
+        }
     }
 
     println!("The total is {}", total);
