@@ -46,7 +46,14 @@ fn main() {
     // You should get one error message with a sad face, and one line with the number 100.
 
     let numbers = vec![0, 1];
-    // for ...
+    for number in numbers {
+        let result = do_math(number);
+
+        match result {
+            Ok(result) => println!("The result was {result}"),
+            Err(e) => eprintln!("{e}"),
+        }
+    }
 
     // 4. Define an enum named `Snack` with the following variants:
     //
