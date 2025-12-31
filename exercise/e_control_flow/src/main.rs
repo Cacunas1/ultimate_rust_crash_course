@@ -1,6 +1,8 @@
 // Silence some warnings so they don't distract from the exercise.
 #![allow(unused_mut, unused_variables)]
 
+use std::num;
+
 fn main() {
     // 1. Use an unconditional `loop` to count how many times we can double `bunnies` until there
     // are over 500 bunnies. (Hint: The answer is 8 times)
@@ -50,6 +52,10 @@ fn main() {
     let mut number = 5;
 
     // (write the `while` loop here)
+    while fives.len() < 12 {
+        fives.push(number);
+        number += 5;
+    }
 
     println!("Here are the first 12 multiples of 5: {:?}", fives);
 
