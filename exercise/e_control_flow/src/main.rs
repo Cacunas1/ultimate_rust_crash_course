@@ -14,6 +14,10 @@ fn main() {
     let mut bunnies = 2;
 
     // (write your `loop` here)
+    while bunnies < 500 {
+        count += 1;
+        bunnies *= 2;
+    }
 
     println!(
         "Bunnies doubled {} times before there were more than 500",
