@@ -1,6 +1,12 @@
 // Silence some warnings that could distract from the exercise
 #![allow(unused)]
 
+fn inspect(item: Option<&str>) {
+    if let Some(str_item) = item {
+        println!("You passed in a {str_item}");
+    }
+}
+
 fn main() {
     // 1. If `maybe_fruit` below is a `Some` variant, then print out the string it wraps. Use the
     // Option type's `is_some` and `unwrap` methods with an `if` expression to implement the logic.
@@ -23,8 +29,8 @@ fn main() {
 
     let maybe_plant: Option<&str> = None;
     let maybe_food: Option<&str> = Some("cake");
-    // inspect(...);
-    // inspect(...);
+    inspect(maybe_plant);
+    inspect(maybe_food);
 
     // 3.  Write a loop that passes each number in the `numbers` vector to the `do_math` function
     // and then checks the result using a `match` expression.
