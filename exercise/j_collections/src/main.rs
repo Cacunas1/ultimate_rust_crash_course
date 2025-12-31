@@ -31,7 +31,9 @@ fn main() {
     // 5. Use a `for` loop to print out each item in `things`. It is okay to consume `things`, since
     // we won't be using it any more after this.
 
-    // for ...
+    for thing in things {
+        println!("- Thing: {thing}");
+    }
 
     // Challenge: Create a vector named `buffer` containing 1024 zeroes using the `vec!` macro. This
     // should easily fit on one line without wrapping.
