@@ -32,8 +32,13 @@ fn main() {
     let mut sum = 0;
 
     // (write the `for` loop here)
-    for i in 7..=23 {
+    let mut i = 7;
+    loop {
         sum += i;
+        i += 1;
+        if i > 23 {
+            break;
+        }
     }
 
     println!("The sum is {}", sum);
@@ -52,9 +57,9 @@ fn main() {
     let mut number = 5;
 
     // (write the `while` loop here)
-    while fives.len() < 12 {
+    for i in 1..=12 {
         fives.push(number);
-        number += 5;
+        number = i * 5;
     }
 
     println!("Here are the first 12 multiples of 5: {:?}", fives);
