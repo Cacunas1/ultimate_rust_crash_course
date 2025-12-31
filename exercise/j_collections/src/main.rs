@@ -20,7 +20,7 @@ fn main() {
     // because the value has been moved into `things`. Uncomment the code below and change it to use
     // array indexing (with square brackets []) to index into `things` to access the `fox` String.
 
-    // println!("What does the {} say?", animal); // get the value from `things` instead of `animal`
+    println!("What does the {} say?", things[1]); // get the value from `things` instead of `animal`
 
     // 4. Sort `things` by calling the `sort` method. The variable needs to be mutable for this to
     // compile without errors. Then uncomment and run the code below.
