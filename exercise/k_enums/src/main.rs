@@ -70,25 +70,49 @@ fn main() {
         Sandwich { lettuce: bool, cheese: bool },
     }
 
-    let healthy_snack = Snack::Apple;
-    let sugary_snack = Snack::Cookies(18);
-    let lunch = Snack::Sandwich {
-        lettuce: false,
-        cheese: true,
-    };
-    if let Snack::Apple = healthy_snack {
-        println!("The healthy snack is an apple.");
-    }
-    if let Snack::Cookies(num_cookies) = sugary_snack {
-        println!("The sugary snack is {} cookies", num_cookies);
-    }
-    if let Snack::Sandwich { lettuce, cheese } = lunch {
-        let lettuce_msg = if lettuce { "does" } else { "does not" };
-        let cheese_msg = if cheese { "does" } else { "does not" };
-        println!(
-            "The sandwich {} have lettuce and {} have cheese.",
-            lettuce_msg, cheese_msg
-        );
+    // let healthy_snack = Snack::Apple;
+    // let sugary_snack = Snack::Cookies(18);
+    // let lunch = Snack::Sandwich {
+    //     lettuce: false,
+    //     cheese: true,
+    // };
+    // if let Snack::Apple = healthy_snack {
+    //     println!("The healthy snack is an apple.");
+    // }
+    // if let Snack::Cookies(num_cookies) = sugary_snack {
+    //     println!("The sugary snack is {} cookies", num_cookies);
+    // }
+    // if let Snack::Sandwich { lettuce, cheese } = lunch {
+    //     let lettuce_msg = if lettuce { "does" } else { "does not" };
+    //     let cheese_msg = if cheese { "does" } else { "does not" };
+    //     println!(
+    //         "The sandwich {} have lettuce and {} have cheese.",
+    //         lettuce_msg, cheese_msg
+    //     );
+    // }
+
+    let snack_collection = vec![
+        Snack::Apple,
+        Snack::Cookies(18u8),
+        Snack::Sandwich {
+            lettuce: false,
+            cheese: true,
+        },
+    ];
+
+    for snack in &snack_collection {
+        match snack {
+            Snack::Apple => println!("The healthy snack is an apple."),
+            Snack::Cookies(num_cookies) => println!("The sugary snack is {} cookies", num_cookies),
+            Snack::Sandwich { lettuce, cheese } => {
+                let lettuce_msg = if *lettuce { "does" } else { "does not" };
+                let cheese_msg = if *cheese { "does" } else { "does not" };
+                println!(
+                    "The sandwich {} have lettuce and {} have cheese.",
+                    lettuce_msg, cheese_msg
+                );
+            }
+        }
     }
 
     // 5. Create an `impl` block for the `Snack` enum and implement a method named `price` which
@@ -105,11 +129,13 @@ fn main() {
     // $5, $36, and $12.
 
     impl Snack {
-        fn price(self) -> u8 {
+        fn price(&self) -> u8 {
             match self {
                 Self::Apple => 5,
                 Self::Cookies(c) => 2 * c,
-                Self::Sandwich { lettuce, cheese } => 10 + (lettuce as u8) * 1 + (cheese as u8) * 2,
+                Self::Sandwich { lettuce, cheese } => {
+                    10 + (*lettuce as u8) * 1 + (*cheese as u8) * 2
+                }
             }
         }
         fn is_apple(&self) -> bool {
@@ -120,19 +146,36 @@ fn main() {
         }
     }
 
-    println!("An apple costs ${}", healthy_snack.price());
-    if let Snack::Cookies(number) = sugary_snack {
-        println!("{} cookies costs ${}", number, sugary_snack.price());
-    }
-    if let Snack::Sandwich { lettuce, cheese } = lunch {
-        let lettuce_message = if lettuce { " with lettuce" } else { "" };
-        let cheese_message = if cheese { " with cheese" } else { "" };
-        println!(
-            "A sandwich{}{} costs ${}",
-            lettuce_message,
-            cheese_message,
-            lunch.price()
-        );
+    // println!("An apple costs ${}", healthy_snack.price());
+    // if let Snack::Cookies(number) = sugary_snack {
+    //     println!("{} cookies costs ${}", number, sugary_snack.price());
+    // }
+    // if let Snack::Sandwich { lettuce, cheese } = lunch {
+    //     let lettuce_message = if lettuce { " with lettuce" } else { "" };
+    //     let cheese_message = if cheese { " with cheese" } else { "" };
+    //     println!(
+    //         "A sandwich{}{} costs ${}",
+    //         lettuce_message,
+    //         cheese_message,
+    //         lunch.price()
+    //     );
+    // }
+
+    for snack in &snack_collection {
+        match snack {
+            Snack::Apple => println!("An apple costs ${}", snack.price()),
+            Snack::Cookies(number) => println!("{} cookies costs ${}", number, snack.price()),
+            Snack::Sandwich { lettuce, cheese } => {
+                let lettuce_message = if *lettuce { " with lettuce" } else { "" };
+                let cheese_message = if *cheese { " with cheese" } else { "" };
+                println!(
+                    "A sandwich{}{} costs ${}",
+                    lettuce_message,
+                    cheese_message,
+                    snack.price()
+                )
+            }
+        }
     }
 
     // Challenge 1: Implement an `is_apple` method for Snack that return a bool. Return `true` if
