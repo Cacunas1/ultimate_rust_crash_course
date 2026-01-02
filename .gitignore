@@ -16,3 +16,4 @@
 **/.idea
 # Files from macOS
 .DS_Store
+*_blurred.png
