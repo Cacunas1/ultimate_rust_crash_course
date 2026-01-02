@@ -25,6 +25,22 @@
 //
 //     let positive_number: u32 = some_string.parse().expect("Failed to parse a number");
 
+use std::str::FromStr;
+
+use clap::Parser;
+
+#[derive(Parser, Debug)]
+struct Args {
+    #[arg(short, long)]
+    processing: String,
+    #[arg(short, long)]
+    input: String,
+    #[arg(short, long)]
+    output: String,
+    #[arg(short, long)]
+    amount: Option<f32>,
+}
+
 fn main() {
     // 1. First, you need to implement some basic command-line argument handling
     // so you can make your program do different things.  Here's a little bit
@@ -32,56 +48,67 @@ fn main() {
     //
     // Challenge: If you're feeling really ambitious, you could delete this code
     // and use the "clap" library instead: https://docs.rs/clap/2.32.0/clap/
-    let mut args: Vec<String> = std::env::args().skip(1).collect();
-    if args.is_empty() {
-        print_usage_and_exit();
-    }
-    let subcommand = args.remove(0);
-    match subcommand.as_str() {
-        // EXAMPLE FOR CONVERSION OPERATIONS
+    // let mut args: Vec<String> = std::env::args().skip(1).collect();
+
+    let args = Args::parse();
+    println!("DEBUG :: args: {args:?}");
+
+    match args.processing.as_str() {
         "blur" => {
-            if args.len() != 2 {
-                print_usage_and_exit();
-            }
-            let infile = args.remove(0);
-            let outfile = args.remove(0);
-            // **OPTION**
-            // Improve the blur implementation -- see the blur() function below
-            blur(infile, outfile);
+            blur(args.input, args.output, args.amount);
         }
-
-        // **OPTION**
-        // Brighten -- see the brighten() function below
-
-        // **OPTION**
-        // Crop -- see the crop() function below
-
-        // **OPTION**
-        // Rotate -- see the rotate() function below
-
-        // **OPTION**
-        // Invert -- see the invert() function below
-
-        // **OPTION**
-        // Grayscale -- see the grayscale() function below
-
-        // A VERY DIFFERENT EXAMPLE...a really fun one. :-)
-        "fractal" => {
-            if args.len() != 1 {
-                print_usage_and_exit();
-            }
-            let outfile = args.remove(0);
-            fractal(outfile);
-        }
-
-        // **OPTION**
-        // Generate -- see the generate() function below -- this should be sort of like "fractal()"!
-
-        // For everything else...
-        _ => {
-            print_usage_and_exit();
-        }
+        _ => print_usage_and_exit(),
     }
+
+    // if args.is_empty() {
+    //     print_usage_and_exit();
+    // }
+    // let subcommand = args.remove(0);
+    // match subcommand.as_str() {
+    //     // EXAMPLE FOR CONVERSION OPERATIONS
+    //     "blur" => {
+    //         if args.len() != 2 {
+    //             print_usage_and_exit();
+    //         }
+    //         let infile = args.remove(0);
+    //         let outfile = args.remove(0);
+    //         // **OPTION**
+    //         // Improve the blur implementation -- see the blur() function below
+    //         blur(infile, outfile);
+    //     }
+    //
+    //     // **OPTION**
+    //     // Brighten -- see the brighten() function below
+    //
+    //     // **OPTION**
+    //     // Crop -- see the crop() function below
+    //
+    //     // **OPTION**
+    //     // Rotate -- see the rotate() function below
+    //
+    //     // **OPTION**
+    //     // Invert -- see the invert() function below
+    //
+    //     // **OPTION**
+    //     // Grayscale -- see the grayscale() function below
+    //
+    //     // A VERY DIFFERENT EXAMPLE...a really fun one. :-)
+    //     "fractal" => {
+    //         if args.len() != 1 {
+    //             print_usage_and_exit();
+    //         }
+    //         let outfile = args.remove(0);
+    //         fractal(outfile);
+    //     }
+    //
+    //     // **OPTION**
+    //     // Generate -- see the generate() function below -- this should be sort of like "fractal()"!
+    //
+    //     // For everything else...
+    //     _ => {
+    //         print_usage_and_exit();
+    //     }
+    // }
 }
 
 fn print_usage_and_exit() {
@@ -94,13 +121,17 @@ fn print_usage_and_exit() {
     std::process::exit(-1);
 }
 
-fn blur(infile: String, outfile: String) {
+fn blur(infile: String, outfile: String, amount: Option<f32>) {
     // Here's how you open an existing image file
     let img = image::open(infile).expect("Failed to open INFILE.");
     // **OPTION**
     // Parse the blur amount (an f32) from the command-line and pass it through
     // to this function, instead of hard-coding it to 2.0.
-    let img2 = img.blur(2.0);
+    let mut actual_amount: f32 = 2.0;
+    if amount.is_some() {
+        actual_amount = amount.unwrap();
+    }
+    let img2 = img.blur(actual_amount);
     // Here's how you save an image to a file.
     img2.save(outfile).expect("Failed writing OUTFILE.");
 }
