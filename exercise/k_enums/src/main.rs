@@ -7,6 +7,18 @@ fn inspect(item: Option<&str>) {
     }
 }
 
+// Define an enum named `Snack` with the following variants:
+// - Apple - which contains no data
+// - Cookies - which contains an unnamed tuple with a single `u8`
+// - Sandwich - which contains an unnamed struct with fields `lettuce` and `cheese`. Both fields
+//   are the type `bool`.
+
+enum Snack {
+    Apple,
+    Cookies((u8)),
+    Sandwich { lettuce: bool, cheese: bool },
+}
+
 fn main() {
     // 1. If `maybe_fruit` below is a `Some` variant, then print out the string it wraps. Use the
     // Option type's `is_some` and `unwrap` methods with an `if` expression to implement the logic.
@@ -65,26 +77,26 @@ fn main() {
     // Then uncomment and run the code below. If you defined the enum correctly, you should get
     // output about three snacks.
 
-    // let healthy_snack = Snack::Apple;
-    // let sugary_snack = Snack::Cookies(18);
-    // let lunch = Snack::Sandwich {
-    //     lettuce: false,
-    //     cheese: true,
-    // };
-    // if let Snack::Apple = healthy_snack {
-    //     println!("The healthy snack is an apple.");
-    // }
-    // if let Snack::Cookies(num_cookies) = sugary_snack {
-    //     println!("The sugary snack is {} cookies", num_cookies);
-    // }
-    // if let Snack::Sandwich { lettuce, cheese } = lunch {
-    //     let lettuce_msg = if lettuce { "does" } else { "does not" };
-    //     let cheese_msg = if cheese { "does" } else { "does not" };
-    //     println!(
-    //         "The sandwich {} have lettuce and {} have cheese.",
-    //         lettuce_msg, cheese_msg
-    //     );
-    // }
+    let healthy_snack = Snack::Apple;
+    let sugary_snack = Snack::Cookies(18);
+    let lunch = Snack::Sandwich {
+        lettuce: false,
+        cheese: true,
+    };
+    if let Snack::Apple = healthy_snack {
+        println!("The healthy snack is an apple.");
+    }
+    if let Snack::Cookies(num_cookies) = sugary_snack {
+        println!("The sugary snack is {} cookies", num_cookies);
+    }
+    if let Snack::Sandwich { lettuce, cheese } = lunch {
+        let lettuce_msg = if lettuce { "does" } else { "does not" };
+        let cheese_msg = if cheese { "does" } else { "does not" };
+        println!(
+            "The sandwich {} have lettuce and {} have cheese.",
+            lettuce_msg, cheese_msg
+        );
+    }
 
     // 5. Create an `impl` block for the `Snack` enum and implement a method named `price` which
     // takes ownership of a Snack and returns a u8 representing the price of the snack according to
