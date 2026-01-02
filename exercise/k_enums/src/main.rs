@@ -7,18 +7,6 @@ fn inspect(item: Option<&str>) {
     }
 }
 
-// Define an enum named `Snack` with the following variants:
-// - Apple - which contains no data
-// - Cookies - which contains an unnamed tuple with a single `u8`
-// - Sandwich - which contains an unnamed struct with fields `lettuce` and `cheese`. Both fields
-//   are the type `bool`.
-
-enum Snack {
-    Apple,
-    Cookies((u8)),
-    Sandwich { lettuce: bool, cheese: bool },
-}
-
 fn main() {
     // 1. If `maybe_fruit` below is a `Some` variant, then print out the string it wraps. Use the
     // Option type's `is_some` and `unwrap` methods with an `if` expression to implement the logic.
@@ -76,6 +64,11 @@ fn main() {
     //
     // Then uncomment and run the code below. If you defined the enum correctly, you should get
     // output about three snacks.
+    enum Snack {
+        Apple,
+        Cookies(u8),
+        Sandwich { lettuce: bool, cheese: bool },
+    }
 
     let healthy_snack = Snack::Apple;
     let sugary_snack = Snack::Cookies(18);
@@ -111,20 +104,30 @@ fn main() {
     // Then uncomment and run the code below. You should see three lines ending with the costs of
     // $5, $36, and $12.
 
-    // println!("An apple costs ${}", healthy_snack.price());
-    // if let Snack::Cookies(number) = sugary_snack {
-    //     println!("{} cookies costs ${}", number, sugary_snack.price());
-    // }
-    // if let Snack::Sandwich { lettuce, cheese } = lunch {
-    //     let lettuce_message = if lettuce { " with lettuce" } else { "" };
-    //     let cheese_message = if cheese { " with cheese" } else { "" };
-    //     println!(
-    //         "A sandwich{}{} costs ${}",
-    //         lettuce_message,
-    //         cheese_message,
-    //         lunch.price()
-    //     );
-    // }
+    impl Snack {
+        fn price(self) -> u8 {
+            match self {
+                Self::Apple => 5,
+                Self::Cookies(c) => 2 * c,
+                Self::Sandwich { lettuce, cheese } => 10 + (lettuce as u8) * 1 + (cheese as u8) * 2,
+            }
+        }
+    }
+
+    println!("An apple costs ${}", healthy_snack.price());
+    if let Snack::Cookies(number) = sugary_snack {
+        println!("{} cookies costs ${}", number, sugary_snack.price());
+    }
+    if let Snack::Sandwich { lettuce, cheese } = lunch {
+        let lettuce_message = if lettuce { " with lettuce" } else { "" };
+        let cheese_message = if cheese { " with cheese" } else { "" };
+        println!(
+            "A sandwich{}{} costs ${}",
+            lettuce_message,
+            cheese_message,
+            lunch.price()
+        );
+    }
 
     // Challenge 1: Implement an `is_apple` method for Snack that return a bool. Return `true` if
     // the value is an `Apple` variant, and `false` otherwise. Then uncomment and run the code
