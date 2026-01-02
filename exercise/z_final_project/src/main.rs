@@ -57,6 +57,9 @@ fn main() {
         "blur" => {
             blur(args.input, args.output, args.amount);
         }
+        "brighten" => {
+            brighten(args.input, args.output, args.amount);
+        }
         _ => print_usage_and_exit(),
     }
 
@@ -136,14 +139,22 @@ fn blur(infile: String, outfile: String, amount: Option<f32>) {
     img2.save(outfile).expect("Failed writing OUTFILE.");
 }
 
-fn brighten(infile: String, outfile: String) {
+fn brighten(infile: String, outfile: String, amount: Option<f32>) {
     // See blur() for an example of how to open / save an image.
+    let img = image::open(infile).expect("Failed to open INFILE.");
 
     // .brighten() takes one argument, an i32.  Positive numbers brighten the
     // image. Negative numbers darken it.  It returns a new image.
+    let mut actual_amount: i32 = 2;
+    if amount.is_some() {
+        actual_amount = amount.unwrap() as i32;
+    }
 
     // Challenge: parse the brightness amount from the command-line and pass it
     // through to this function.
+    let img2 = img.brighten(actual_amount);
+
+    img2.save(outfile).expect("Failed writing OUTFILE.");
 }
 
 fn crop(infile: String, outfile: String) {
