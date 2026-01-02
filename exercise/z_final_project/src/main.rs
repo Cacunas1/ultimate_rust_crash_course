@@ -25,8 +25,6 @@
 //
 //     let positive_number: u32 = some_string.parse().expect("Failed to parse a number");
 
-use std::str::FromStr;
-
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -39,6 +37,14 @@ struct Args {
     output: String,
     #[arg(short, long)]
     amount: Option<f32>,
+    #[arg(short, long)]
+    x: Option<u32>,
+    #[arg(short, long)]
+    y: Option<u32>,
+    #[arg(short, long)]
+    width: Option<u32>,
+    #[arg(short = 'H', long)]
+    height: Option<u32>,
 }
 
 fn main() {
@@ -60,6 +66,14 @@ fn main() {
         "brighten" => {
             brighten(args.input, args.output, args.amount);
         }
+        "crop" => crop(
+            args.input,
+            args.output,
+            args.x,
+            args.y,
+            args.width,
+            args.height,
+        ),
         _ => print_usage_and_exit(),
     }
 
@@ -157,16 +171,30 @@ fn brighten(infile: String, outfile: String, amount: Option<f32>) {
     img2.save(outfile).expect("Failed writing OUTFILE.");
 }
 
-fn crop(infile: String, outfile: String) {
+fn crop(
+    infile: String,
+    outfile: String,
+    x: Option<u32>,
+    y: Option<u32>,
+    width: Option<u32>,
+    height: Option<u32>,
+) {
     // See blur() for an example of how to open an image.
+    let mut img = image::open(infile).expect("Failed to open INFILE.");
 
+    let x: u32 = x.unwrap_or(0u32);
+    let y: u32 = y.unwrap_or(0u32);
+    let width: u32 = width.unwrap_or(0u32);
+    let height: u32 = height.unwrap_or(0u32);
     // .crop() takes four arguments: x: u32, y: u32, width: u32, height: u32
     // You may hard-code them, if you like.  It returns a new image.
 
+    let img2 = img.crop(x, y, width, height);
     // Challenge: parse the four values from the command-line and pass them
     // through to this function.
 
     // See blur() for an example of how to save the image.
+    img2.save(outfile).expect("Failed writing OUTFILE");
 }
 
 fn rotate(infile: String, outfile: String) {
