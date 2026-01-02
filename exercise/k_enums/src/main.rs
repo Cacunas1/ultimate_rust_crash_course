@@ -112,6 +112,12 @@ fn main() {
                 Self::Sandwich { lettuce, cheese } => 10 + (lettuce as u8) * 1 + (cheese as u8) * 2,
             }
         }
+        fn is_apple(&self) -> bool {
+            match self {
+                Self::Apple => true,
+                _ => false,
+            }
+        }
     }
 
     println!("An apple costs ${}", healthy_snack.price());
@@ -133,14 +139,14 @@ fn main() {
     // the value is an `Apple` variant, and `false` otherwise. Then uncomment and run the code
     // below.
 
-    // let snacks = vec![Snack::Apple, Snack::Cookies(5), Snack::Apple];
-    // for (index, snack) in snacks.iter().enumerate() {
-    //     if snack.is_apple() {
-    //         println!("Snack {} is an apple.", index)
-    //     } else {
-    //         println!("Snack {} is NOT an apple.", index)
-    //     }
-    // }
+    let snacks = vec![Snack::Apple, Snack::Cookies(5), Snack::Apple];
+    for (index, snack) in snacks.iter().enumerate() {
+        if snack.is_apple() {
+            println!("Snack {} is an apple.", index)
+        } else {
+            println!("Snack {} is NOT an apple.", index)
+        }
+    }
 
     // Challenge 2: Refactor the code from (4) to put all off the variables into a vector, then loop
     // through the vector and use a `match` expression instead of `if let` statements. The output
