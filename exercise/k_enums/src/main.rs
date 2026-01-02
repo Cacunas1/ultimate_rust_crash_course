@@ -139,10 +139,7 @@ fn main() {
             }
         }
         fn is_apple(&self) -> bool {
-            match self {
-                Self::Apple => true,
-                _ => false,
-            }
+            matches!(self, Self::Apple)
         }
     }
 
