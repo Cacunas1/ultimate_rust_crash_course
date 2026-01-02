@@ -1,9 +1,22 @@
 // Silence some warnings that could distract from the exercise
 #![allow(unused)]
 
-fn inspect(item: Option<&str>) {
-    if let Some(str_item) = item {
-        println!("You passed in a {str_item}");
+enum Snack {
+    Apple,
+    Cookies(u8),
+    Sandwich { lettuce: bool, cheese: bool },
+}
+
+impl Snack {
+    fn price(&self) -> u8 {
+        match self {
+            Self::Apple => 5,
+            Self::Cookies(c) => 2 * c,
+            Self::Sandwich { lettuce, cheese } => 10 + (*lettuce as u8) * 1 + (*cheese as u8) * 2,
+        }
+    }
+    fn is_apple(&self) -> bool {
+        matches!(self, Self::Apple)
     }
 }
 
@@ -64,11 +77,6 @@ fn main() {
     //
     // Then uncomment and run the code below. If you defined the enum correctly, you should get
     // output about three snacks.
-    enum Snack {
-        Apple,
-        Cookies(u8),
-        Sandwich { lettuce: bool, cheese: bool },
-    }
 
     // let healthy_snack = Snack::Apple;
     // let sugary_snack = Snack::Cookies(18);
@@ -128,21 +136,6 @@ fn main() {
     // Then uncomment and run the code below. You should see three lines ending with the costs of
     // $5, $36, and $12.
 
-    impl Snack {
-        fn price(&self) -> u8 {
-            match self {
-                Self::Apple => 5,
-                Self::Cookies(c) => 2 * c,
-                Self::Sandwich { lettuce, cheese } => {
-                    10 + (*lettuce as u8) * 1 + (*cheese as u8) * 2
-                }
-            }
-        }
-        fn is_apple(&self) -> bool {
-            matches!(self, Self::Apple)
-        }
-    }
-
     // println!("An apple costs ${}", healthy_snack.price());
     // if let Snack::Cookies(number) = sugary_snack {
     //     println!("{} cookies costs ${}", number, sugary_snack.price());
@@ -191,6 +184,12 @@ fn main() {
     // Challenge 2: Refactor the code from (4) to put all off the variables into a vector, then loop
     // through the vector and use a `match` expression instead of `if let` statements. The output
     // should remain the same.
+}
+
+fn inspect(item: Option<&str>) {
+    if let Some(str_item) = item {
+        println!("You passed in a {str_item}");
+    }
 }
 
 fn do_math(x: i32) -> Result<i32, String> {
